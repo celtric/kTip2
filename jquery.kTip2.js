@@ -1,5 +1,5 @@
 /**
- * kTip 0.2.6
+ * kTip2 0.0.1
  * Based on mgExternal 1.0.30
  *
  * Copyright 2012 Ricard Osorio Mañanas
@@ -50,41 +50,41 @@
 
 	//---[ jQuery plugin ]----------------------------------------------------//
 
-	$.fn.kTip = function(defaultContent, options) {
+	$.fn.kTip2 = function(defaultContent, options) {
 		var instance,
 		    count = 0;
 		this.each(function(){
-			if ($(this).data('kTip')) {
-				instance = $(this).data('kTip');
+			if ($(this).data('kTip2')) {
+				instance = $(this).data('kTip2');
 			} else {
 				count++;
-				$(this).data('kTip', kTip(this, defaultContent, options));
+				$(this).data('kTip2', kTip2(this, defaultContent, options));
 			}
 		});
 		// jQuery objects with only 1 element return either the instance or a
 		// jQuery chain. Multiple elements always return a jQuery chain.
 		// Eg:
-		//   $('#elem').kTip(); First call, returns jQuery
-		//   $('#elem').kTip(); Second call, returns kTip instance
-		//   $('.elements').kTip(); First call, returns jQuery
-		//   $('.elements').kTip(); Second call, returns jQuery
+		//   $('#elem').kTip2(); First call, returns jQuery
+		//   $('#elem').kTip2(); Second call, returns kTip2 instance
+		//   $('.elements').kTip2(); First call, returns jQuery
+		//   $('.elements').kTip2(); Second call, returns jQuery
 		return (!instance || count > 1) ? this : instance;
 	};
 
-	$.expr[':'].kTip = function(elem) {
-		return !!$(elem).data('kTip');
+	$.expr[':'].kTip2 = function(elem) {
+		return !!$(elem).data('kTip2');
 	};
 
-	//---[ kTip constructor ]-------------------------------------------------//
+	//---[ kTip2 constructor ]-------------------------------------------------//
 
-	$.kTip = window.kTip = function(trigger, defaultContent, options) {
+	$.kTip2 = window.kTip2 = function(trigger, defaultContent, options) {
 
-		// Force instance: ktip(...) -> new kTip(...)
-		if (!(this instanceof kTip)) {
-			return new kTip(trigger, defaultContent, options);
+		// Force instance: ktip(...) -> new kTip2(...)
+		if (!(this instanceof kTip2)) {
+			return new kTip2(trigger, defaultContent, options);
 		}
 
-		// trigger is optional when used only once. Eg: kTip("Hi!");
+		// trigger is optional when used only once. Eg: kTip2("Hi!");
 		if (!trigger || !trigger.nodeType) {
 			options = defaultContent;
 			defaultContent = trigger;
@@ -123,9 +123,9 @@
 			disabledClass: 'disabled',
 			showDelay: (options && options.tooltip && options.tooltip.bind == 'hover') ? 200 : 0, // Show delay in ms
 			hideDelay: (options && options.tooltip && options.tooltip.bind == 'hover') ? 200 : 0, // Hide delay in ms
-			showAnimation: 'kTip-fadeInDown',
+			showAnimation: 'kTip2-fadeInDown',
 			showSpeed: 300,
-			hideAnimation: 'kTip-fadeOutDown',
+			hideAnimation: 'kTip2-fadeOutDown',
 			hideSpeed: 300,
 			overlay: (options && options.display == 'modal') ? true : false,
 			overlayColor: '#fff',
@@ -133,7 +133,7 @@
 			overlayShowSpeed: 300,
 			overlayHideSpeed: 300,
 			submitIdentifier: 'input[type="submit"]',
-			ignoreClickSelector: '.kTip-ignore-click',
+			ignoreClickSelector: '.kTip2-ignore-click',
 			focusPriority: [
 				'[autofocus]:visible:enabled:first',
 				':input:not(:radio):visible:enabled:first'
@@ -187,7 +187,7 @@
 		$.extend(true, this.settings, options);
 
 		// Help detect children
-		this.settings.tooltip.positionSource.data('kTip', this);
+		this.settings.tooltip.positionSource.data('kTip2', this);
 
 		// Convert overlay color from hex to rgb (http://stackoverflow.com/a/5624139)
 		this.settings.overlayColorRGB = function(hex) {
@@ -230,7 +230,7 @@
 			switch (this.settings.display) {
 
 				case 'modal':
-					this.$trigger.on('click.kTip', function(e){
+					this.$trigger.on('click.kTip2', function(e){
 						self.open(self.settings.showDelay);
 						e.preventDefault();
 						//e.stopPropagation();
@@ -240,7 +240,7 @@
 				case 'tooltip':
 					switch (this.settings.tooltip.bind) {
 						case 'click':
-							this.$trigger.on('click.kTip', function(e){
+							this.$trigger.on('click.kTip2', function(e){
 								self.isVisible() ? self.close() : self.open(self.settings.showDelay);
 								e.preventDefault();
 								//e.stopPropagation();
@@ -248,18 +248,18 @@
 							break;
 						case 'hover':
 							this.$trigger.on({
-								"mouseenter.kTip": function(){self.open(self.settings.showDelay)},
-								"mouseleave.kTip": function(){self.close(self.settings.hideDelay)},
-								"mousedown.kTip": function(e){e.stopPropagation()},
-								"mouseup.kTip": function(e){e.stopPropagation()}
+								"mouseenter.kTip2": function(){self.open(self.settings.showDelay)},
+								"mouseleave.kTip2": function(){self.close(self.settings.hideDelay)},
+								"mousedown.kTip2": function(e){e.stopPropagation()},
+								"mouseup.kTip2": function(e){e.stopPropagation()}
 							});
 							break;
 						case 'focus':
 							this.$trigger.on({
-								"focus.kTip": function(){self.open(self.settings.showDelay)},
-								"blur.kTip": function(){self.close(self.settings.hideDelay)},
-								"mousedown.kTip": function(e){e.stopPropagation()},
-								"mouseup.kTip": function(e){e.stopPropagation()}
+								"focus.kTip2": function(){self.open(self.settings.showDelay)},
+								"blur.kTip2": function(){self.close(self.settings.hideDelay)},
+								"mousedown.kTip2": function(e){e.stopPropagation()},
+								"mouseup.kTip2": function(e){e.stopPropagation()}
 							});
 							break;
 					}
@@ -273,9 +273,9 @@
 		}
 	};
 
-	//---[ kTip prototype ]---------------------------------------------------//
+	//---[ kTip2 prototype ]---------------------------------------------------//
 
-	kTip.prototype = {
+	kTip2.prototype = {
 
 		defaults: {},
 
@@ -285,13 +285,13 @@
 
 		areAllChildrenClosed: function() {
 
-			// Find children that have kTip instances. If they are open, let
+			// Find children that have kTip2 instances. If they are open, let
 			// them decide about their own children (don't do recursive search).
 
 			var allChildrenClosed = true;
 
-			this.$content.find(':kTip').each(function(){
-				if ($(this).kTip().isVisible()) {
+			this.$content.find(':kTip2').each(function(){
+				if ($(this).kTip2().isVisible()) {
 					allChildrenClosed = false;
 				}
 			});
@@ -301,7 +301,7 @@
 
 		modalContainerSwitch: function(enable) {
 
-			if (!isTouchDevice && !$('.kTip-container-parent:visible').not(this.$container.parent()).length) {
+			if (!isTouchDevice && !$('.kTip2-container-parent:visible').not(this.$container.parent()).length) {
 				$('body').css({
 					// Only add margin if the body has a scrollbar
 					marginRight: (enable && $(document).height() > $(window).height()) ? browserScrollbarWidth : '',
@@ -349,7 +349,7 @@
 						this.loadAjaxContent(url);
 					}
 				} else {
-					throw "kTip: no defaultContent or settings.ajax.url provided.";
+					throw "kTip2: no defaultContent or settings.ajax.url provided.";
 				}
 			}
 			// Show existing content
@@ -425,7 +425,7 @@
 				if (this.settings.cssAnimations && browserSupportsCSSAnimations) {
 					this._applyCssAnimation(
 						this.$overlay,
-						'kTip-fadeOut',
+						'kTip2-fadeOut',
 						this.settings.overlayHideSpeed,
 						onOverlayFadeOut
 					);
@@ -435,8 +435,8 @@
 			}
 
 			// Close opened children
-			this.$content.find(':kTip').each(function(){
-				$(this).kTip().close();
+			this.$content.find(':kTip2').each(function(){
+				$(this).kTip2().close();
 			});
 		},
 
@@ -524,10 +524,10 @@
 
 			if (this.settings.overlay) {
 				// Show over all other overlays
-				this.$overlay.insertAfter('.kTip-overlay:last');
+				this.$overlay.insertAfter('.kTip2-overlay:last');
 
 				if (this.settings.cssAnimations && browserSupportsCSSAnimations) {
-					this._applyCssAnimation(this.$overlay.show(), 'kTip-fadeIn', this.settings.overlayShowSpeed);
+					this._applyCssAnimation(this.$overlay.show(), 'kTip2-fadeIn', this.settings.overlayShowSpeed);
 				} else {
 					this.$overlay.fadeIn(this.settings.overlayShowSpeed);
 				}
@@ -544,7 +544,7 @@
 			this.moveContainer('instant');
 			this.$container.hide().css('visibility', '');
 
-			// Show over all other kTip windows
+			// Show over all other kTip2 windows
 			if (this.settings.display == 'modal') {
 				this.$container.parent().appendTo('body');
 			} else {
@@ -573,7 +573,7 @@
 				this.$overlay.remove();
 			}
 			this.settings.onDestroy.call(this);
-			this.$trigger.removeData('kTip');
+			this.$trigger.removeData('kTip2');
 		},
 
 		_bindSpecialActions: function() {
@@ -582,15 +582,15 @@
 
 			// File uploads don't work on IE. MUST FIX
 			if (this.settings.ajax.handleForms && $.fn.ajaxSubmit) {
-				this.$content.find('form').on('submit.kTip', function(e){
+				this.$content.find('form').on('submit.kTip2', function(e){
 					var $form = $(this);
 					e.preventDefault();
 					// if ($form.attr('enctype') == 'multipart/form-data' || $form.find('input[type="file"]').length) {
-					// 	alert("File uploads are discouraged in the current version of kTip. Please provide support through an external plugin.");
+					// 	alert("File uploads are discouraged in the current version of kTip2. Please provide support through an external plugin.");
 					// 	return;
 					// }
 					self._lastSubmitName = $form.find(self.settings.submitIdentifier).val();
-					$form.ajaxSubmit($.extend(true, {}, self.settings.ajax, $form.data('kTip-ajax'), {
+					$form.ajaxSubmit($.extend(true, {}, self.settings.ajax, $form.data('kTip2-ajax'), {
 						url: $form.attr('action') || self.settings.ajax.url || self.$trigger.attr('href'),
 						success: function(data) {
 							self.disableLoadingState();
@@ -610,22 +610,22 @@
 				});
 			}
 
-			// this.$content.find('form').on('submit kTip_submit', function(e){
+			// this.$content.find('form').on('submit kTip2_submit', function(e){
 			// 	e.preventDefault();
 			// 	var $elem = $(this);
-			// 	if (e.type == 'kTip_submit') {
+			// 	if (e.type == 'kTip2_submit') {
 			// 		self.loadAjaxContent($elem, {type: 'move'}, 100);
 			// 	} else {
 			// 		// We wrap the call so other events are called first (we give
 			// 		// priority to form validation, custom submits, etc.)
 			// 		setTimeout(function(){
 			// 			if (!e.isPropagationStopped())
-			// 				$elem.trigger('kTip_submit');
+			// 				$elem.trigger('kTip2_submit');
 			// 		}, 100);
 			// 	}
 			// });
 
-			this.$content.find('[class*="kTip-redirect"]').on('click.kTip', function(e){
+			this.$content.find('[class*="kTip2-redirect"]').on('click.kTip2', function(e){
 				e.preventDefault();
 
 				var $elem = $(this),
@@ -647,7 +647,7 @@
 				self.redirect($elem.attr('href'), modalAnimation);
 			});
 
-			this.$content.find('.kTip-close').on('click.kTip', function(e){
+			this.$content.find('.kTip2-close').on('click.kTip2', function(e){
 				self.close();
 				e.preventDefault();
 			});
@@ -719,8 +719,8 @@
 
 			if (this.$content) {
 				this.$content.find(':input').prop('disabled', true);
-				this.$content.find(':input, .kTip-loading-disabled').addClass(this.settings.disabledClass);
-				this.$content.find('.kTip-loading').show();
+				this.$content.find(':input, .kTip2-loading-disabled').addClass(this.settings.disabledClass);
+				this.$content.find('.kTip2-loading').show();
 			}
 		},
 
@@ -735,8 +735,8 @@
 
 			if (this.$content) {
 				this.$content.find(':input').prop('disabled', false);
-				this.$content.find(':input, .kTip-loading-disabled').removeClass(this.settings.disabledClass);
-				this.$content.find('.kTip-loading').hide();
+				this.$content.find(':input, .kTip2-loading-disabled').removeClass(this.settings.disabledClass);
+				this.$content.find('.kTip2-loading').hide();
 			}
 		},
 
@@ -773,8 +773,8 @@
 
 			if (!this.$container) {
 				this.$container = $('<div/>')
-					.data('kTip', this) // Help detect children
-					.addClass('kTip-container')
+					.data('kTip2', this) // Help detect children
+					.addClass('kTip2-container')
 					.addClass(this.settings.extraClass)
 					.css({
 						position: 'absolute',
@@ -783,8 +783,8 @@
 					.hide()
 					.appendTo(this.settings.display == 'modal'
 						? $('<div/>')
-							.data('kTip', this) // Help detect children
-							.addClass('kTip-container-parent')
+							.data('kTip2', this) // Help detect children
+							.addClass('kTip2-container-parent')
 							.css(isTouchDevice ? {
 								zIndex: this.settings.zIndex
 							} : {
@@ -799,19 +799,19 @@
 							.hide()
 							.appendTo('body')
 						: 'body')
-					.on('mouseup.kTip', function(e){
+					.on('mouseup.kTip2', function(e){
 						// Required if outsideClose is set to true
 						self._preventNextMouseup = true;
 					});
 
 				this.$content = $('<div/>')
-					.addClass('kTip-content')
+					.addClass('kTip2-content')
 					.css(this.settings.css)
 					.appendTo(this.$container);
 
 				if (this.settings.tooltip.bind == 'hover') {
-					this.$container.on('mouseenter.kTip', function(){self.open(self.settings.showDelay)});
-					this.$container.on('mouseleave.kTip', function(){self.close(self.settings.hideDelay)});
+					this.$container.on('mouseenter.kTip2', function(){self.open(self.settings.showDelay)});
+					this.$container.on('mouseleave.kTip2', function(){self.close(self.settings.hideDelay)});
 				}
 
 				// Resize re-position except for touch modals. Touch devices
@@ -819,11 +819,11 @@
 				// the desktop version, and scrolling can lead to the modal
 				// constantly moving.
 				if (this.settings.display == 'tooltip' || !isTouchDevice) {
-					$(window).on('resize.kTip', function(){self.moveContainer()});
+					$(window).on('resize.kTip2', function(){self.moveContainer()});
 				}
 
 				if (this.settings.display == 'tooltip') {
-					$(window).on('scroll.kTip', function(){self.moveContainer()});
+					$(window).on('scroll.kTip2', function(){self.moveContainer()});
 				}
 
 				// Hide on outside click
@@ -837,7 +837,7 @@
 					// outside. We also don't want to close in that circumstance.
 					// So here we are, tracking where the clicking starts...
 
-					$('html').on('mousedown.kTip', function(e){
+					$('html').on('mousedown.kTip2', function(e){
 						if (
 							!self._isIgnoredClick(e)
 							&&  self.areAllChildrenClosed()
@@ -855,7 +855,7 @@
 					// Also: using html instead of document as clicking on the
 					// sidebar would trigger the event, and body does not always
 					// cover the whole page (html does)
-					$('html').on('mouseup.kTip', function(e){
+					$('html').on('mouseup.kTip2', function(e){
 						if (self._lastMousedownOutside) {
 							if (self._preventNextMouseup) {
 								self._preventNextMouseup = false;
@@ -863,7 +863,7 @@
 							// We also check if the clicked target meets
 							// setings.ignoreClickSelector criteria, as
 							// sometimes the mouseup event is prevented
-							// (select2 for example does this, and makes kTip
+							// (select2 for example does this, and makes kTip2
 							// close the window as a result)
 							else if (!self._isIgnoredClick(e) && e.which == 1 && self.isVisible()) {
 								self.close();
@@ -874,7 +874,7 @@
 
 				// Hide on ESC press
 				if (this.settings.escClose) {
-					$(document).on('keyup.kTip', function(e){
+					$(document).on('keyup.kTip2', function(e){
 						if (e.keyCode == 27 && self.isVisible() && self.areAllChildrenClosed()) {
 							self.close();
 						}
@@ -886,8 +886,8 @@
 
 			if (this.settings.overlay && !this.$overlay) {
 				this.$overlay = $('<div/>')
-					.data('kTip', this) // Help detect children
-					.attr('class', 'kTip-overlay')
+					.data('kTip2', this) // Help detect children
+					.attr('class', 'kTip2-overlay')
 					.css({
 						background: (this.settings.cssAnimations && browserSupportsCSSAnimations)
 							? 'rgba('
@@ -911,20 +911,20 @@
 
 			if (!this.$tooltipArrow && this.settings.display == 'tooltip' && this.settings.tooltip.arrowSize) {
 				this.$tooltipArrow = $('<div/>')
-					.addClass('kTip-arrow')
+					.addClass('kTip2-arrow')
 					.css({
 						position: 'absolute'
 					})
 					.appendTo(this.$container)
 					.append($('<div/>')
-						.addClass('kTip-arrow-shadow')
+						.addClass('kTip2-arrow-shadow')
 						.css({
 							borderStyle: 'solid',
 							borderWidth: this.settings.tooltip.arrowSize
 						})
 					)
 					.append($('<div/>')
-						.addClass('kTip-arrow-front')
+						.addClass('kTip2-arrow-front')
 						.css({
 							borderColor: this.settings.tooltip.arrowFrontColor || this.$content.css('background-color'),
 							borderStyle: 'solid',
@@ -1003,7 +1003,7 @@
 							top: 0,
 							visibility: 'hidden'
 						})
-						.find('.kTip-content')
+						.find('.kTip2-content')
 							.css({
 								height: this.settings.css.height || '',
 								width: this.settings.css.width || ''
@@ -1013,8 +1013,8 @@
 						.appendTo('body');
 
 					this.$content.css({
-						//height: $tempContainer.find('.kTip-content').height()
-						width: $tempContainer.find('.kTip-content').width()
+						//height: $tempContainer.find('.kTip2-content').height()
+						width: $tempContainer.find('.kTip2-content').width()
 					});
 
 					$tempContainer.remove();
@@ -1310,10 +1310,10 @@
 						borderRightColor: 'transparent',
 						borderBottomWidth: position == 'top' ? 0 : arrowSize,
 						borderTopWidth: position == 'bottom' ? 0 : arrowSize
-					}).filter('.kTip-arrow-front').css({
+					}).filter('.kTip2-arrow-front').css({
 						left: 0,
 						top: (position == 'top' ? '-' : '')+this.$content.css('borderBottomWidth')
-					}).end().filter('.kTip-arrow-shadow')
+					}).end().filter('.kTip2-arrow-shadow')
 						.css('border-'+position+'-color', this.$content.css('border-'+(position == 'top' ? 'bottom' : 'top')+'-color'));
 				} else {
 					this.$tooltipArrow.css({
@@ -1330,10 +1330,10 @@
 						borderTopColor: 'transparent',
 						borderLeftWidth: position == 'right' ? 0 : arrowSize,
 						borderRightWidth: position == 'left' ? 0 : arrowSize
-					}).filter('.kTip-arrow-front').css({
+					}).filter('.kTip2-arrow-front').css({
 						left: (position == 'left' ? '-' : '')+this.$content.css('borderBottomWidth'),
 						top: 0
-					}).end().filter('.kTip-arrow-shadow')
+					}).end().filter('.kTip2-arrow-shadow')
 						.css('border-'+position+'-color', this.$content.css('border-'+(position == 'left' ? 'right' : 'left')+'-color'));
 				}
 			} else if (this.$tooltipArrow) {

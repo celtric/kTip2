@@ -1,13 +1,13 @@
 /*---[ Misc ]-----------------------------------------------------------------*/
 
-.kTip-container {
+.kTip2-container {
 	-webkit-backface-visibility: hidden; /* WebKit fix for CSS animations */
 }
 
 /*---[ Styles ]---------------------------------------------------------------*/
 
 /* Style: default modal */
-.kT-modal .kTip-content {
+.kT-modal .kTip2-content {
 	background-color: #fff;
 	border: 1px solid #999;
 	-webkit-border-radius: 2px;
@@ -21,7 +21,7 @@
 }
 
 /* Style: default tooltip */
-.kT-tooltip .kTip-content {
+.kT-tooltip .kTip2-content {
 	background-color: #fff;
 	border: 1px solid #999;
 	-webkit-border-radius: 2px;
@@ -32,12 +32,12 @@
 	        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-.kT-tooltip .kTip-arrow-shadow {
+.kT-tooltip .kTip2-arrow-shadow {
 	border-color: #888;
 }
 
 /* Style: tipsy */
-.kT-tipsy .kTip-content {
+.kT-tipsy .kTip2-content {
 	background-color: #333;
 	border: 0; /* `none` returns `medium` as width in IE, but we expect a number */
 	-webkit-border-radius: 4px;
@@ -53,22 +53,22 @@
 
 /*---[ Animations (daneden.me/animate) ]------------------------------------- */
 
-@-webkit-keyframes kTip-fadeIn {
+@-webkit-keyframes kTip2-fadeIn {
 	  0% { opacity: 0; }
 	100% { opacity: 1; }
 }
 
-@-moz-keyframes kTip-fadeIn {
+@-moz-keyframes kTip2-fadeIn {
 	  0% { opacity: 0; }
 	100% { opacity: 1; }
 }
 
-@keyframes kTip-fadeIn {
+@keyframes kTip2-fadeIn {
 	  0% { opacity: 0; }
 	100% { opacity: 1; }
 }
 
-@-webkit-keyframes kTip-fadeInDown {
+@-webkit-keyframes kTip2-fadeInDown {
 	0% {
 		opacity: 0;
 		-webkit-transform: translateY(-20px);
@@ -79,7 +79,7 @@
 	}
 }
 
-@-moz-keyframes kTip-fadeInDown {
+@-moz-keyframes kTip2-fadeInDown {
 	0% {
 		opacity: 0;
 		-moz-transform: translateY(-20px);
@@ -90,7 +90,7 @@
 	}
 }
 
-@keyframes kTip-fadeInDown {
+@keyframes kTip2-fadeInDown {
 	0% {
 		opacity: 0;
 		transform: translateY(-20px);
@@ -101,22 +101,22 @@
 	}
 }
 
-@-webkit-keyframes kTip-fadeOut {
+@-webkit-keyframes kTip2-fadeOut {
 	  0% { opacity: 1; }
 	100% { opacity: 0; }
 }
 
-@-moz-keyframes kTip-fadeOut {
+@-moz-keyframes kTip2-fadeOut {
 	  0% { opacity: 1; }
 	100% { opacity: 0; }
 }
 
-@keyframes kTip-fadeOut {
+@keyframes kTip2-fadeOut {
 	  0% { opacity: 1; }
 	100% { opacity: 0; }
 }
 
-@-webkit-keyframes kTip-fadeOutDown {
+@-webkit-keyframes kTip2-fadeOutDown {
 	0% {
 		opacity: 1;
 		-webkit-transform: translateY(0);
@@ -127,7 +127,7 @@
 	}
 }
 
-@-moz-keyframes kTip-fadeOutDown {
+@-moz-keyframes kTip2-fadeOutDown {
 	0% {
 		opacity: 1;
 		-moz-transform: translateY(0);
@@ -138,7 +138,7 @@
 	}
 }
 
-@keyframes kTip-fadeOutDown {
+@keyframes kTip2-fadeOutDown {
 	0% {
 		opacity: 1;
 		transform: translateY(0);
